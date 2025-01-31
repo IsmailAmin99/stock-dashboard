@@ -1,5 +1,7 @@
+# Flask Backend 
+
 # Import libraries:
-from flask import Flask, jsonify
+from app import Flask, jsonify
 import yfinance as yf
 
 # Initialize the Flask app
@@ -23,4 +25,3 @@ def get_stock_data(ticker):
 # Run Flask app 
 if __name__ == '__main__':
     app.run(debug = True) #run app in debug mode for developments
-    
