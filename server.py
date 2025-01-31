@@ -1,7 +1,7 @@
 # Flask Backend 
 
 # Import libraries:
-from FlaskApp import Flask, jsonify
+from server import Flask, jsonify
 import yfinance as yf
 
 # Initialize the Flask app
