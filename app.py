@@ -1,14 +1,14 @@
 # Flask Backend 
 
 # Import libraries:
-from server import Flask, jsonify
+from flask import Flask, jsonify
 import yfinance as yf
 
 # Initialize the Flask app
 app = Flask(__name__)
 
 #Define a route to fetch stock data dynamically based on ticker
-@app.route('/sotck/,ticker>')
+@app.route('/stock/<ticker>', methods = ['GET'])
 def get_stock_data(ticker):
     """
     This funct retrieves historical data for the given ticker
@@ -18,6 +18,9 @@ def get_stock_data(ticker):
 
     stock = yf.Ticker(ticker) #stock object 
     data = stock.history(period = "1mo")
+
+    # Convert the index (Timestamps) to str -> Avoids TypeError
+    data.index = data.index.astype(str)
     
     # Convert the DataFrame to a dict so Flask can return it as JSON
     return jsonify(data.to_dict())
