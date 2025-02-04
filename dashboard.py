@@ -1,7 +1,7 @@
 #import libraries 
-import dash     #for building the UI
+import dash   #for building the UI
 from dash import dcc, html, Input, Output   #components for interactivity
-import plotly.express as px     #plotly : data visualization
+import plotly.express as px    #plotly: data visualization
 import yfinance as yf
 
 #initialize the app
@@ -17,4 +17,18 @@ def fetch_stockData(ticker = "AAPL", period = "1 monnth"):
 
     #stock obj
     stock = yf.Ticker(ticker)
-    df = stock.history(period = period)     #fetching historical data
+    df = stock.history(period = period)   #fetching historical data
+
+#define the layout of the dashboard 
+app.layout = html.Div([
+    #title
+    html.H1("Stock Price Dashboard", style = {"textAlign": "center"}),
+
+    #user input field for entering a stock ticker
+    dcc.Input(id = "stock-input", type = "text", value = "AAPL", style = {"marginRight": "10px"}),
+    
+    html.Button("Submit", id = "submit-button"), #submit button
+
+    #graph that will display stock data
+    dcc.Graph(id = "stock-graph"),
+])
