@@ -15,9 +15,14 @@ def fetch_stockData(ticker = "AAPL", period = "1 monnth"):
         - Default period: 1 month 
     """
 
-    #stock obj
+    #stock object 
     stock = yf.Ticker(ticker)
     df = stock.history(period = period)   #fetching historical data
+
+    #ensure data exists before returning
+    if df.empty:
+        return None
+    return df
 
 #define the layout of the dashboard 
 app.layout = html.Div
