@@ -20,14 +20,16 @@ def fetch_stockData(ticker = "AAPL", period = "1 monnth"):
     df = stock.history(period = period)   #fetching historical data
 
 #define the layout of the dashboard 
-app.layout = html.Div([
+app.layout = html.Div
+([
     #title
     html.H1("Stock Price Dashboard", style = {"textAlign": "center"}),
 
     #user input field for entering a stock ticker
     dcc.Input(id = "stock-input", type = "text", value = "AAPL", style = {"marginRight": "10px"}),
     
-    html.Button("Submit", id = "submit-button"), #submit button
+    #submit button
+    html.Button("Submit", id = "submit-button"), 
 
     #graph that will display stock data
     dcc.Graph(id = "stock-graph"),
