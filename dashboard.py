@@ -54,7 +54,7 @@ app.layout = html.Div
 
 def update_graph(n_clicks, ticker):
     """
-    Updates the stock graph when the user submits a new sotck ticker. 
+    Updates the stock graph when the user submits a new stock ticker. 
         - Fetches data for entered ticker
         - Updates graph 
     """
@@ -70,3 +70,7 @@ def update_graph(n_clicks, ticker):
 
     #return updated graph
     return fig
+
+#run the app
+if __name__ == '__main__':
+    app.run_server(debug=True)
