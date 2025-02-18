@@ -24,6 +24,9 @@ def fetch_stockData(ticker = "AAPL", period = "1 monnth"):
         return None
     return df
 
+#makes sure dynamically created callbacks can be recognized
+app = dash.dash(__name__, suppress_callback_extension = True)
+
 #defining the layout of the dashboard 
 app.layout = html.Div
 ([
@@ -37,7 +40,7 @@ app.layout = html.Div
         (
             id = "stock-input", #ID used in the callback funct
             type = "text",
-            value = "NVDA", #default ticker -> Nvidia
+            value = "GOOGL", #default ticker -> Google 
             debounce = True, #reduces unnecessary updates 
             style = {"margiRight": "10px"}
         ),
