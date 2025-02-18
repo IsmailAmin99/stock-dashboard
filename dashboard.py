@@ -24,20 +24,29 @@ def fetch_stockData(ticker = "AAPL", period = "1 monnth"):
         return None
     return df
 
-#define the layout of the dashboard 
+#defining the layout of the dashboard 
 app.layout = html.Div
 ([
     #title
     html.H1("Stock Price Dashboard", style = {"textAlign": "center"}),
 
-    #user input field for entering a stock ticker
-    dcc.Input(id = "stock-input", type = "text", value = "AAPL", style = {"marginRight": "10px"}),
-    
-    #submit button
-    html.Button("Submit", id = "submit-button"), 
+    html.Div
+    ([
+        #user input for entering wanted stock ticker
+        dcc.Input
+        (
+            id = "stock-input", #ID used in the callback funct
+            type = "text",
+            value = "NVDA", #default ticker -> Nvidia
+            debounce = True, #reduces unnecessary updates 
+            style = {"margiRight": "10px"}
+        ),
 
-    #graph that will display stock data
-    dcc.Graph(id = "stock-graph"),
+        #submit button -> updates the graph 
+        html.Button("Submit", id = "submit-button"),
+    ],
+        style = {"display": "flex", "justifyContent": "center"}),
+    
 ])
 
 #define callback to update the graph when user enters new stock ticker
