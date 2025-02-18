@@ -5,7 +5,8 @@ import plotly.express as px    #plotly: data visualization
 import yfinance as yf
 
 #initialize the app
-app = dash.Dash(__name__)
+    #makes sure dynamically created callbacks can be recognized
+app = dash.dash(__name__, suppress_callback_extension = True)
 
 #fetch the stock data
 def fetch_stockData(ticker = "AAPL", period = "1 monnth"):
@@ -24,8 +25,7 @@ def fetch_stockData(ticker = "AAPL", period = "1 monnth"):
         return None
     return df
 
-#makes sure dynamically created callbacks can be recognized
-app = dash.dash(__name__, suppress_callback_extension = True)
+
 
 #defining the layout of the dashboard 
 app.layout = html.Div
