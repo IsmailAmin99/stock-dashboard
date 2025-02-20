@@ -6,7 +6,7 @@ import yfinance as yf
 
 #initialize the app
     #makes sure dynamically created callbacks can be recognized
-app = dash.dash(__name__, suppress_callback_extension = True)
+app = dash.Dash(__name__, suppress_callback_exceptions=True)
 
 #fetch the stock data
 def fetch_stockData(ticker = "AAPL", period = "1 monnth"):
@@ -24,7 +24,6 @@ def fetch_stockData(ticker = "AAPL", period = "1 monnth"):
     if df.empty:
         return None
     return df
-
 
 
 #defining the layout of the dashboard 
@@ -58,10 +57,10 @@ app.layout = html.Div
     Output("stock-graph", "figure"),
 
     #trigger when the submit button is clicked 
-    Input("submit-button", "n_clicks"),
+    [Input("submit-button", "n_clicks")],
 
     #get stock ticker input 
-    Input("stock-input", "value")
+    [Input("stock-input", "value")]
 )
 
 def update_graph(n_clicks, ticker):
@@ -75,7 +74,10 @@ def update_graph(n_clicks, ticker):
 
     #error handling for if stock data isn't found
     if df is None:
+        print("No data available")
         return px.line(title = f"No data availabale for {ticker}")
+
+    print(df.head()) #return and display the first couple rows 
     
     #create a new line chart with updated stock data
     fig = px.line(df, x = df.index, y = "Close", title = f"Stock Prices for {ticker}")
