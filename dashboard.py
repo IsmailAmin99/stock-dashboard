@@ -45,6 +45,12 @@ app.layout = html.Div([
         
     #graph styling:
     style = {"width": "80%", "margin": "auto"}
+    ),
+
+    #auto-refreshing the graph every 24hrs:
+    dcc.Interval(
+        id = "interval-update",
+        interval = 24 * 60 * 60 * 1000, #24hrs in milliseconds
     )
 ])
 
