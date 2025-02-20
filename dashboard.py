@@ -15,7 +15,9 @@ app.layout = html.Div([
              "fontSize" : "36px", "marginBottom" : "20px" }),
     
     #webpage/project descr:
-    html.P("The goal of this project is to trying making an interactive stock dashboard", id="test-text"),
+    html.P("The goal of this project is to trying making an interactive stock dashboard", id="test-text",
+           stlye = {"fontSize" : "12px"}),
+    
 
 
     
