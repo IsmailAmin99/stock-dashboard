@@ -1,5 +1,7 @@
-import dash
-from dash import dcc, html
+import dash #frontend webpage 
+from dash import dcc, html, Input, Output #for styling and editing webpage output 
+import plotly.express as px #plotly graph
+import yfinance as yf #stock info
 
 # Initialize Dash app
 app = dash.Dash(__name__)
