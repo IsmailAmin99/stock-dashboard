@@ -31,11 +31,13 @@ default_fig = px.line(title = "Enter a stock ticker and click Submit")
 app.layout = html.Div
 ([
     #title
-    html.H1("Stock Price Dashboard", style = {"textAlign": "center"}),
+    html.H1("Stock Price Dashboard", style = {"textAlign": "center", "color": "blue"}),
 
     html.Div
     ([
+        """
         #user input for entering wanted stock ticker
+        
         dcc.Input
         (
             id = "stock-input", #ID used in the callback funct
@@ -48,9 +50,18 @@ app.layout = html.Div
         #submit button -> updates the graph 
         html.Button("Submit", id = "submit-button"),
     ],
+    
         style = {"display": "flex", "justifyContent": "center"}),
+    """
+    ]),
+    
+    html.P("Enter a stock symbol and click submit:"),
 
-        dcc.Graph(id = "stock-graph", figure = default_fig),
+    dcc.Input(id="stock-input", type="text", value="AAPL"),  # Input box
+    html.Button("Submit", id="submit-button"),
+
+    html.H3("Graph will appear below if working:", style={"marginTop": "20px"}),
+    dcc.Graph(id = "stock-graph", figure = default_fig),
 ])
 
 #define callback to update the graph when user enters new stock ticker
