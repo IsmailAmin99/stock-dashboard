@@ -7,10 +7,17 @@ app = dash.Dash(__name__)
 # Print confirmation that Dash is starting
 print("✅ Dash app is starting...")
 
-# Define a test layout to check if components render
+#define layout of webpage
 app.layout = html.Div([
-    html.H1("Isma'il's Stock Dashboard", style={"textAlign": "center", "color": "green"}),
+    
+    #title:
+    html.H1("Isma'il's Stock Dashboard", style={"textAlign": "center", "color": "#4CAF50",
+             "fontSize" : "36px", "marginBottom" : "20px" }),
+    
+    #webpage/project descr:
     html.P("The goal of this project is to trying making an interactive stock dashboard", id="test-text"),
+
+
     
 ])
 
