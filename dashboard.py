@@ -59,6 +59,23 @@ def get_stocks(ticker = "AAPL"):
         return None
     return df
 
+#callback for updating the graph
+@app.callback(
+    Output("stock-graph", "figure"),
+    Input("submit-button", "n_clicks"),
+    Input("stock-input", "value")
+)
+
+def update_graph(n_clicks, ticker):
+    df = get_stocks(ticker)
+    
+    if df is None:
+        return px.line(title = f"No data available for {ticker}")
+    
+    fig = px.line(df, x = df.index, y = "Close", title = f"Daily Stock Prices for {ticker}")
+    
+    return fig
+
 # Run the Dash app
 if __name__ == '__main__':
     app.run_server(debug=True)
