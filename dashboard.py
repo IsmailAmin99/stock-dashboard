@@ -2,9 +2,26 @@ import dash #frontend webpage
 from dash import dcc, html, Input, Output #for styling and editing webpage output 
 import plotly.express as px #plotly graph
 import yfinance as yf #stock info
+from cachetools import TTLCache, cached #for caching the stock data -> ensures we don't fetch data too often 
 
 # Initialize Dash app
 app = dash.Dash(__name__)
+
+#create a cache for storing stock data for 1hr (3600secs)
+stock_cache = TTLCache(maxsize = 100, ttl = 3600)
+
+@cached(stock_cache)
+
+#function to get stock data:
+def get_stocks(ticker = "AAPL"):
+    stock = yf.Ticker(ticker)
+    df = stock.history(period = "7d", interval = "1d") # get last 7 days with daily updates
+
+    #checking to see if there's any data 
+    if df.empty:
+        print("Didn't get anything.")
+        return None
+    return df
 
 #define layout of webpage
 app.layout = html.Div([
@@ -51,19 +68,10 @@ app.layout = html.Div([
     dcc.Interval(
         id = "interval-update",
         interval = 24 * 60 * 60 * 1000, #24hrs in milliseconds
+        n_intervals = 0
     )
 ])
 
-#function to get stock data:
-def get_stocks(ticker = "AAPL"):
-    stock = yf.Ticker(ticker)
-    df = stock.history(period = "7d", interval = "1d") # get last 7 days with daily updates
-
-    #checking to see if there's any data 
-    if df.empty:
-        print("Didn't get anything.")
-        return None
-    return df
 
 #callback for updating the graph
 @app.callback(
