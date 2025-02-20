@@ -15,10 +15,20 @@ app.layout = html.Div([
              "fontSize" : "36px", "marginBottom" : "20px" }),
     
     #webpage/project descr:
-    html.P("The goal of this project is to trying making an interactive stock dashboard", id="test-text",
-           stlye = {"fontSize" : "12px"}),
+    html.P("The goal of this project is to trying making an interactive stock dashboard. Try putting in a few stocks and see how it goes.", id="test-text"),
     
+    #user input:
+    html.Div([
 
+        dcc.Input(
+            id = "stock-input",
+            type = "text",
+            value = "AAPL", #test/default ticker
+            placeholder = "Enter a ticker...",
+            style = {"fontSize": "10px", "borderRadius": "5px", "border" : "1px solid #ccc",
+                     "marginRight" : "10px"}
+        ),
+    ])
 
     
 ])
