@@ -31,11 +31,13 @@ app.layout = html.Div([
 
         #button for submission:
         html.Button("Submit", id = "submit-button", style = {
-            "padding": "10px 15px", "fontSize": "16px", "borderRadius" : "5px", "border" : "none",
+            "padding": "7px 15px", "fontSize": "15px", "borderRadius" : "5px", "border" : "none",
             "backgroundColor" : "#4CAF50", "color" : "white", "cursor" : "pointer"})
-    ])
-
+    ],
     
+    #input styling:
+    style = {"display" : "flex", "justifyContent" : "center", "alignItems" : "center", "marginBottom": "20px"}
+    ),
 ])
 
 print("✅ Layout has been assigned.")
