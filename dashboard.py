@@ -35,6 +35,15 @@ app.layout = html.Div([
     #input styling -> centering user input box & submit button: 
     style = {"display" : "flex", "justifyContent" : "center", "alignItems" : "center", "marginBottom": "20px"}
     ),
+
+    #webpage graph section:
+    html.Div([
+        dcc.Graph(id = "stock-graph", figure = px.line(title = "Enter a stock ticker and click Submit.")),
+    ],
+        
+    #graph styling:
+    style = {"width": "80%", "margin": "auto"}
+    )
 ])
 
 # Run the Dash app
