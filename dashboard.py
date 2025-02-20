@@ -24,10 +24,15 @@ app.layout = html.Div([
             id = "stock-input",
             type = "text",
             value = "AAPL", #test/default ticker
-            placeholder = "Enter a ticker...",
-            style = {"fontSize": "10px", "borderRadius": "5px", "border" : "1px solid #ccc",
-                     "marginRight" : "10px"}
+            placeholder = "Enter a ticker...", #this text will show until the user clicks into the box and types
+            style = {"fontSize": "11px", "borderRadius": "5px", "border" : "2px solid #ccc",
+                     "marginRight" : "10px", "padding" : "8px"}
         ),
+
+        #button for submission:
+        html.Button("Submit", id = "submit-button", style = {
+            "padding": "10px 15px", "fontSize": "16px", "borderRadius" : "5px", "border" : "none",
+            "backgroundColor" : "#4CAF50", "color" : "white", "cursor" : "pointer"})
     ])
 
     
