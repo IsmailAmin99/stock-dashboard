@@ -48,6 +48,17 @@ app.layout = html.Div([
     )
 ])
 
+#function to get stock data:
+def get_stocks(ticker = "AAPL"):
+    stock = yf.Ticker(ticker)
+    df = stock.history(period = "7d", interval = "1d") # get last 7 days with daily updates
+
+    #checking to see if there's any data 
+    if df.empty:
+        print("Didn't get anything.")
+        return None
+    return df
+
 # Run the Dash app
 if __name__ == '__main__':
     app.run_server(debug=True)
