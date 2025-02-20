@@ -5,91 +5,44 @@ import plotly.express as px    #plotly: data visualization
 import yfinance as yf
 
 #initialize the app
-    #makes sure dynamically created callbacks can be recognized
-app = dash.Dash(__name__, suppress_callback_exceptions=True)
+app = dash.Dash(__name__)
 
-#fetch the stock data
-def fetch_stockData(ticker = "AAPL", period = "1 monnth"):
-    """
-    fetches historical stock data for the given ticker
-        - Default ticker: AAPL -> Apple
-        - Default period: 1 month 
-    """
+#terminal display 
+print("✅ Dash app is starting...")
 
-    #stock object 
-    stock = yf.Ticker(ticker)
-    df = stock.history(period = period)   #fetching historical data
-
-    #ensure data exists before returning
-    if df.empty:
-        return None
-    return df
-
-default_fig = px.line(title = "Enter a stock ticker and click Submit")
-
-#defining the layout of the dashboard 
+#define layout 
 app.layout = html.Div
 ([
-    #title
-    html.H1("Stock Price Dashboard", style = {"textAlign": "center", "color": "blue"}),
+    #title -> html.H1 = header 
+    html.H1("Isma'il's Stock Data Visualization", style = {"textAlign" : "center", "color" : "#4CAF50",
+        "fontSize": "36px", "marginBottom": "20px"} ),
 
+    #Intro to the project: -> html.P = paragraph
+    html.P("The goal of this webpage is to visualize stock data with various graphs for analysis", 
+           style = {"textAlign" : "left"}, id = "Description"),
+    
+    #User Input section:
     html.Div
     ([
-    
-        #user input for entering wanted stock ticker
-        
         dcc.Input
         (
-            id = "stock-input", #ID used in the callback funct
-            type = "text",
-            value = "AAPL", #default ticker -> Apple
-            debounce = True, #reduces unnecessary updates 
-            style = {"margiRight": "10px"}
+        id = "stock-input", 
+        type = "text",
+        value = "AAPL", #default ticker
+        debounce = True, 
+        placeholder = "Enter a stock symbol/ticker...",
+        style = {"padding": "10px", "fontSize" : "16px", "borderRaduis" : "5px"
+                 "border": "1px solid #ccc", "marginRight": "10px"}
         ),
 
-        #submit button -> updates the graph 
-        html.Button("Submit", id = "submit-button"),
-    ],
-    
-        style = {"display": "flex", "justifyContent": "center"}),
-    
-        dcc.Graph(id = "stock-graph", figure = default_fig),
+        html.Button("Submit", id = "submit-button", style = {
+            "fontsize" : "10px", "borderRadius": "5px", 
+            "backgroundColor": "#4CAF50", "color": "white", "cursor": "pointer"})
+    ])
 ])
 
-#define callback to update the graph when user enters new stock ticker
-@app.callback(
-    #update graph output 
-    Output("stock-graph", "figure"),
+print("✅ Layout has been assigned and initialized")
 
-    #trigger when the submit button is clicked 
-    [Input("submit-button", "n_clicks")],
-
-    #get stock ticker input 
-    [Input("stock-input", "value")]
-)
-
-def update_graph(n_clicks, ticker):
-    """
-    Updates the stock graph when the user submits a new stock ticker. 
-        - Fetches data for entered ticker
-        - Updates graph 
-    """
-
-    df = fetch_stockData(ticker)
-
-    #error handling for if stock data isn't found
-    if df is None:
-        print("No data available")
-        return px.line(title = f"No data availabale for {ticker}")
-
-    print(df.head()) #return and display the first couple rows 
-    
-    #create a new line chart with updated stock data
-    fig = px.line(df, x = df.index, y = "Close", title = f"Stock Prices for {ticker}")
-
-    #return updated graph
-    return fig
-
-#run the app
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    print("✅ Running the Dash app server...")
+    app.run_server(debug = True)
