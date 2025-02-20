@@ -25,6 +25,7 @@ def fetch_stockData(ticker = "AAPL", period = "1 monnth"):
         return None
     return df
 
+default_fig = px.line(title = "Enter a stock ticker and click Submit")
 
 #defining the layout of the dashboard 
 app.layout = html.Div
@@ -39,7 +40,7 @@ app.layout = html.Div
         (
             id = "stock-input", #ID used in the callback funct
             type = "text",
-            value = "GOOGL", #default ticker -> Google 
+            value = "AAPL", #default ticker -> Apple
             debounce = True, #reduces unnecessary updates 
             style = {"margiRight": "10px"}
         ),
@@ -48,7 +49,8 @@ app.layout = html.Div
         html.Button("Submit", id = "submit-button"),
     ],
         style = {"display": "flex", "justifyContent": "center"}),
-    
+
+        dcc.Graph(id = "stock-graph", figure = default_fig),
 ])
 
 #define callback to update the graph when user enters new stock ticker
