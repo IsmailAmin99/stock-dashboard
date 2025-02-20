@@ -1,48 +1,22 @@
-#import libraries 
-import dash   #for building the UI
-from dash import dcc, html, Input, Output   #components for interactivity
-import plotly.express as px    #plotly: data visualization
-import yfinance as yf
+import dash
+from dash import dcc, html
 
-#initialize the app
+# Initialize Dash app
 app = dash.Dash(__name__)
 
-#terminal display 
+# Print confirmation that Dash is starting
 print("✅ Dash app is starting...")
 
-#define layout 
-app.layout = html.Div
-([
-    #title -> html.H1 = header 
-    html.H1("Isma'il's Stock Data Visualization", style = {"textAlign" : "center", "color" : "#4CAF50",
-        "fontSize": "36px", "marginBottom": "20px"} ),
-
-    #Intro to the project: -> html.P = paragraph
-    html.P("The goal of this webpage is to visualize stock data with various graphs for analysis", 
-           style = {"textAlign" : "left"}, id = "Description"),
+# Define a test layout to check if components render
+app.layout = html.Div([
+    html.H1("Isma'il's Stock Dashboard", style={"textAlign": "center", "color": "green"}),
+    html.P("The goal of this project is to trying making an interactive stock dashboard", id="test-text"),
     
-    #User Input section:
-    html.Div
-    ([
-        dcc.Input
-        (
-        id = "stock-input", 
-        type = "text",
-        value = "AAPL", #default ticker
-        debounce = True, 
-        placeholder = "Enter a stock symbol/ticker...",
-        style = {"padding": "10px", "fontSize" : "16px", "borderRaduis" : "5px"
-                 "border": "1px solid #ccc", "marginRight": "10px"}
-        ),
-
-        html.Button("Submit", id = "submit-button", style = {
-            "fontsize" : "10px", "borderRadius": "5px", 
-            "backgroundColor": "#4CAF50", "color": "white", "cursor": "pointer"})
-    ])
 ])
 
-print("✅ Layout has been assigned and initialized")
+print("✅ Layout has been assigned.")
 
+# Run the Dash app
 if __name__ == '__main__':
-    print("✅ Running the Dash app server...")
-    app.run_server(debug = True)
+    print("✅ Running the Dash server...")
+    app.run_server(debug=True)
