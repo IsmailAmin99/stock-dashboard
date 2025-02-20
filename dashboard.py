@@ -12,10 +12,10 @@ stock_cache = TTLCache(maxsize = 100, ttl = 3600)
 
 @cached(stock_cache)
 
-#function to get stock data:
+#function to get stock data weekly:
 def get_stocks(ticker = "AAPL"):
     stock = yf.Ticker(ticker)
-    df = stock.history(period = "7d", interval = "1d") # get last 7 days with daily updates
+    df = stock.history(period = "3mo", interval = "1wk") 
 
     #checking to see if there's any data 
     if df.empty:
@@ -64,10 +64,10 @@ app.layout = html.Div([
     style = {"width": "80%", "margin": "auto"}
     ),
 
-    #auto-refreshing the graph every 24hrs:
+    #auto-refreshing the graph every week:
     dcc.Interval(
         id = "interval-update",
-        interval = 24 * 60 * 60 * 1000, #24hrs in milliseconds
+        interval = 7 * 24 * 60 * 60 * 1000, #7 days in milliseconds
         n_intervals = 0
     )
 ])
