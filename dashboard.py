@@ -35,7 +35,7 @@ app.layout = html.Div
 
     html.Div
     ([
-        """
+    
         #user input for entering wanted stock ticker
         
         dcc.Input
@@ -52,16 +52,8 @@ app.layout = html.Div
     ],
     
         style = {"display": "flex", "justifyContent": "center"}),
-    """
-    ]),
     
-    html.P("Enter a stock symbol and click submit:"),
-
-    dcc.Input(id="stock-input", type="text", value="AAPL"),  # Input box
-    html.Button("Submit", id="submit-button"),
-
-    html.H3("Graph will appear below if working:", style={"marginTop": "20px"}),
-    dcc.Graph(id = "stock-graph", figure = default_fig),
+        dcc.Graph(id = "stock-graph", figure = default_fig),
 ])
 
 #define callback to update the graph when user enters new stock ticker
