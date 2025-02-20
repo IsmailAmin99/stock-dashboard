@@ -4,9 +4,6 @@ from dash import dcc, html
 # Initialize Dash app
 app = dash.Dash(__name__)
 
-# Print confirmation that Dash is starting
-print("✅ Dash app is starting...")
-
 #define layout of webpage
 app.layout = html.Div([
     
@@ -35,14 +32,11 @@ app.layout = html.Div([
             "backgroundColor" : "#4CAF50", "color" : "white", "cursor" : "pointer"})
     ],
     
-    #input styling:
+    #input styling -> centering user input box & submit button: 
     style = {"display" : "flex", "justifyContent" : "center", "alignItems" : "center", "marginBottom": "20px"}
     ),
 ])
 
-print("✅ Layout has been assigned.")
-
 # Run the Dash app
 if __name__ == '__main__':
-    print("✅ Running the Dash server...")
     app.run_server(debug=True)
